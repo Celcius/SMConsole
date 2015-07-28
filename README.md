@@ -7,21 +7,21 @@ A sample class names 'Example' has all the calls to the Log methods.
 
 
 # Features
-*Tagged Logs
+Tagged Logs
 
-*Typed Logs - Normal, Warning, Error
+Typed Logs - Normal, Warning, Error
 
-*Log Save
+Log Save
 
-*Log Clear & Clear on Play
+Log Clear & Clear on Play
 
-*Filtered search
+Filtered search
 
-*Collapse logs
+Collapse logs
 
-*Jump to line by double clicking entry
+Jump to line by double clicking entry
 
-*Stack Trace that alows jumping to line
+Stack Trace that alows jumping to line
 
 # Build
 To export as package, go 'Assets > Export Package...' and select the SMConsole inside Standard Assets
