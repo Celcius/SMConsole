@@ -1,7 +1,7 @@
 # SMConsole
 SMConsole is an extended console for Unity 
 
-To add the console go Window >  SM Console
+To add the console go 'Window >  SM Console'
 
 A sample class names 'Example' has all the calls to the Log methods.
 
@@ -16,4 +16,5 @@ Collapse logs
 Jump to line by double clicking entry
 Stack Trace that alows jumping to line
 
-
+# Build
+To export as package, go 'Assets > Export Package...' and select the SMConsole inside Standard Assets
