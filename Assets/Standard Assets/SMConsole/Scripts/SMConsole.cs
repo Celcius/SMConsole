@@ -48,8 +48,9 @@ public class SMConsole
     _data.currentScrollViewHeight = this.position.height / 2;
     _data.mainEditorConsole = this;
 
-    Application.RegisterLogCallback(SMConsoleData.Instance.HandleLog);
-    Application.RegisterLogCallbackThreaded(SMConsoleData.Instance.HandleLog);
+    Application.logMessageReceivedThreaded += systemLogReceiver;
+    //Application.RegisterLogCallback(SMConsoleData.Instance.HandleLog);
+    //Application.RegisterLogCallbackThreaded(SMConsoleData.Instance.HandleLog);
 
      // Init components
     _headerBar = new SMConsoleHeaderBar();
@@ -58,11 +59,9 @@ public class SMConsole
     _botSection = new SMConsoleBotSection();
   }
 
-  void OnDisable()
+   void OnDisable()
   {
-      Application.RegisterLogCallback(null);
-      Application.RegisterLogCallbackThreaded(null);
-
+      Application.logMessageReceivedThreaded -= systemLogReceiver;
   }
 
   // Draw Editor
@@ -107,6 +106,10 @@ public class SMConsole
  
    }
 
+    public void systemLogReceiver  (String logString, String stackTrace, LogType type) {
+        SMConsole.Log(logString, SMConsoleData.SYSTEM_TAG, convertLogTypes(type));
+	}
+
  #endif
 
   #region static Log functions
@@ -125,9 +128,23 @@ public class SMConsole
       Log(log, tag, type, StackTraceEntry.EMPTY_STACK_TRACE);
   }
 
+   private static SMLogType convertLogTypes(LogType type)
+  {
+       switch(type)
+       {
+           case  LogType.Error :
+           case LogType.Exception:
+           case LogType.Assert:
+               return SMLogType.ERROR;
+           case  LogType.Warning:
+              return SMLogType.WARNING;
+           case  LogType.Log:
+              return SMLogType.NORMAL;   
+       }
+       return SMLogType.NORMAL;
+  }
   private static void Log(string log, string tag, SMLogType type, string stackTrace)
   {
-    Debug.Log(log);
 #if UNITY_EDITOR
     LogMessage message;
     SMConsoleData _data = SMConsoleData.Instance;

@@ -52,6 +52,7 @@ public class SMConsoleData
   // Constants
   public const string DEFAULT_SEARCH_STR = "Search Logs";
   public const string EMPTY_TAG = "-";
+  public const string SYSTEM_TAG = "System";
 
   private static SMConsoleData instance;
 
